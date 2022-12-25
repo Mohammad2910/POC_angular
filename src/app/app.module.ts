@@ -10,7 +10,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'https://projekt-mohammad.ddns.net/',
+        url: 'https://keycloak-mohammad.ddns.net/',
         realm: 'Test',
         clientId: 'angular-client'
       },
