@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {HttpClientModule} from "@angular/common/http";
+import { HomeComponent } from './home/home.component';
+import {AuthGuard} from "./auth.guard";
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'https://projekt-mohammad.ddns.net/',
+        url: 'http://localhost:8080/',
         realm: 'Test',
         clientId: 'angular-client'
       },
@@ -23,7 +25,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     KeycloakAngularModule
   ],
   providers: [
+    AuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,

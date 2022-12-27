@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {KeycloakProfile} from "keycloak-js";
 import {KeycloakService} from "keycloak-angular";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit{
   public isLoggedin = false;
   public profile: KeycloakProfile | null = null;
 
-  constructor(private readonly keycloak: KeycloakService) {
+  constructor(private router: Router, private readonly keycloak: KeycloakService) {
   }
 
   public async ngOnInit(){
@@ -23,10 +24,12 @@ export class AppComponent implements OnInit{
 
     if (this.isLoggedin) {
       this.profile = await this.keycloak.loadUserProfile();
-      console.log(this.keycloak.getToken());
+      // console.log(this.keycloak.getToken());
       //console.log(this.keycloak.register());
     } else {
       this.loginSession();
+      this.router.navigate(['/', 'home']);
+      window.location.href = '/home';
     }
   }
 
