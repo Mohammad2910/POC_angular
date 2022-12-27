@@ -10,16 +10,8 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, private readonly keycloak: KeycloakService) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.isLoggedin) {
-      //this.profile = await this.keycloak.loadUserProfile();
-      //console.log(this.keycloak.getToken());
-      //console.log(this.keycloak.register());
-      return true;
-    }
-
-    // not logged in so redirect to login page with the return url
-    // this.router.navigate(['/login'], {queryParams: {returnUrl: state.url, user: route.queryParams.user, token: route.queryParams.token}});
-    return false;
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    this.isLoggedin = await this.keycloak.isLoggedIn();
+    return this.isLoggedin;
   }
 }

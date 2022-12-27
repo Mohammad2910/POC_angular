@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {KeycloakProfile} from "keycloak-js";
 import {KeycloakService} from "keycloak-angular";
 import {Router} from "@angular/router";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'poc_application';
+export class AppComponent implements OnInit {
+  title = '';
   public isLoggedin = false;
   public profile: KeycloakProfile | null = null;
 
@@ -24,12 +25,9 @@ export class AppComponent implements OnInit{
 
     if (this.isLoggedin) {
       this.profile = await this.keycloak.loadUserProfile();
-      // console.log(this.keycloak.getToken());
-      //console.log(this.keycloak.register());
+      this.router.navigate(['/', 'home']);
     } else {
       this.loginSession();
-      this.router.navigate(['/', 'home']);
-      window.location.href = '/home';
     }
   }
 

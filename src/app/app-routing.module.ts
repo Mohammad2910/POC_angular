@@ -9,6 +9,11 @@ const routes: Routes = [
     path: 'home',
     canActivate: [AuthGuard],
     component: HomeComponent
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    component: AppComponent
   }
 ];
 
