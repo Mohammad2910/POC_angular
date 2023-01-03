@@ -12,8 +12,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'https://projekt-mohammad.ddns.net',
-        realm: 'Test',
+        url: 'http://localhost:8080/',
+        realm: 'Test-Angular',
         clientId: 'angular-client'
       },
       initOptions: {

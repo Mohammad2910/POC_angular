@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
     type roleUsers = Array<{id: number, text: string}>;
 
     if (this.isLoggedin) {
+      let a = this.keycloak.getKeycloakInstance().token;
+      localStorage.setItem('token', JSON.stringify(a));
       this.profile = await this.keycloak.loadUserProfile();
       this.router.navigate(['/', 'home']);
     } else {
