@@ -18,14 +18,14 @@ export class AppComponent implements OnInit {
   }
 
   public async ngOnInit(){
-    // this.loginSession();
     this.isLoggedin = await this.keycloak.isLoggedIn();
 
-    type roleUsers = Array<{id: number, text: string}>;
+    // type roleUsers = Array<{id: number, text: string}>;
 
     if (this.isLoggedin) {
-      let a = this.keycloak.getKeycloakInstance().token;
-      localStorage.setItem('token', JSON.stringify(a));
+      let token = this.keycloak.getKeycloakInstance().token;
+      console.log(token);
+      localStorage.setItem('token', JSON.stringify(token));
       this.profile = await this.keycloak.loadUserProfile();
       this.router.navigate(['/', 'home']);
     } else {

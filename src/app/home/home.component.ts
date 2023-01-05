@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit{
     const options = {params: params, headers: httpHeaders};
     this.httpClient.get<[]>('http://localhost:8080/admin/realms/Test-Angular/users', options).subscribe(
       response => {
-        console.log(typeof response);
+        console.log(response);
         // @ts-ignore
         const mapped = Object.keys(response).map(key => (this.user.push(response[key].username)));
       }
